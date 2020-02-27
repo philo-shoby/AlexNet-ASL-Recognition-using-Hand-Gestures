@@ -1,0 +1,22 @@
+def next_batch(batch_size, data, labels):
+    idx = np.arange(0, len(data))
+    np.random.shuffle(idx)
+    idx = idx[: batch_size]
+    data_shuffle = [data[i] for i in idx]
+    labels_shuffle = [labels[i] for i in idx]
+    return np.asarray(data_shuffle), np.asarray(labels_shuffle)
+    
+def display_images(data, title, display_label = True):
+    x, y = data
+    fig, axes = plt.subplots(2, 6, figsize = (18, 5))
+    fig.subplots_adjust(hspace = 0.5, wspace = 0.5)
+    fig.suptitle(title, fontsize = 18)
+    for i, ax in enumerate(axes.flat):
+        ax.imshow(x[i])
+        if display_label:
+            ax.set_xlabel(y[i])
+        ax.set_xticks([])
+        ax.set_yticks([])
+    plt.show()
+display_images(next_batch(12, x_train, y_train), 'Training Images')
+display_images(next_batch(12, x_test, y_test), 'Test Images')
