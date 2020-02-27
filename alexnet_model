@@ -78,3 +78,10 @@ def alexnet(x, w, b):
     
     return out
     logits = alexnet(X, weights, biases)
+loss_op = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits = logits, labels = Y))
+optimizer = tf.train.AdamOptimizer(learning_rate = learning_rate)
+train_op = optimizer.minimize(loss_op)
+
+correct_pred = tf.equal(tf.argmax(logits, 1), tf.argmax(Y, 1))
+accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
+accuracy
