@@ -1,0 +1,5 @@
+y_test_encoded = np.array(list(range(len(y_test))))
+y_train_encoded = np.array([y_test.index(i) if i != 'del' else 29 for i in y_train])
+
+y_test_encoded = np.eye(30)[y_test_encoded]
+y_train_encoded = np.eye(30)[y_train_encoded]
